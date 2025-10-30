@@ -5,11 +5,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Email
@@ -34,21 +37,27 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BusinessCardTheme {
-                Column(content = {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.SpaceBetween,
+                    content = {
                     Info(
                         "Tiago Tito",
                         "Engenheiro de Software",
                         modifier = Modifier
-                            .padding(16.dp)
+                            //.padding(32.dp)
                             .align(alignment = Alignment.CenterHorizontally)
+                            .padding(top = 128.dp)
                     )
+
                     Contact(
                         phone = "+55(85)9 91999999",
                         linkedin = "@Tiago Tito",
                         email = "tiagotito.contato@gmail.com",
                         modifier = Modifier
-                            .padding(16.dp)
+                            //.padding(16.dp)
                             .align(alignment = Alignment.CenterHorizontally)
+                            .padding(bottom = 56.dp)
                     )
                 })
             }
@@ -61,7 +70,8 @@ fun Info(name: String, title: String, modifier: Modifier = Modifier) {
     val image = painterResource(R.drawable.android_logo)
 
     Column (
-        modifier
+        modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Image(
             painter = image,
@@ -73,7 +83,9 @@ fun Info(name: String, title: String, modifier: Modifier = Modifier) {
         Text(
             text = name,
             fontSize = 36.sp,
-            textAlign = TextAlign.Center
+            modifier = Modifier
+                .align(alignment = Alignment.CenterHorizontally)
+                .padding(top = 8.dp)
         )
         Text(
             text = title,
@@ -88,19 +100,25 @@ fun Info(name: String, title: String, modifier: Modifier = Modifier) {
 @Composable
 fun Contact(phone: String, linkedin: String, email: String, modifier: Modifier = Modifier) {
     Column (
-        modifier
+        modifier,
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        Row {
+        Row (
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             Icon(
                 imageVector = Icons.Default.Call,
-                contentDescription = "phone"
+                contentDescription = "phone",
+                modifier = Modifier
             )
             Text(
                 text = phone,
                 fontSize = 16.sp
             )
         }
-        Row {
+        Row (
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             Icon(
                 imageVector = Icons.Default.Share,
                 contentDescription = "share icon"
@@ -110,7 +128,9 @@ fun Contact(phone: String, linkedin: String, email: String, modifier: Modifier =
                 fontSize = 16.sp
             )
         }
-        Row {
+        Row (
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             Icon(
                 imageVector = Icons.Default.Email,
                 contentDescription = "Email",
@@ -135,6 +155,12 @@ fun GreetingPreview() {
                     .padding(16.dp)
                     .align(alignment = Alignment.CenterHorizontally)
             )
+
+            Spacer(
+                modifier = Modifier
+                    .height(128.dp)
+            )
+
             Contact(
                 phone = "+55(85)9 91999999",
                 linkedin = "@Tiago Tito",

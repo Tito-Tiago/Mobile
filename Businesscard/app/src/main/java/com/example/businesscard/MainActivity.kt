@@ -6,14 +6,21 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,13 +34,23 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BusinessCardTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Column(content = {
                     Info(
-                        name = "Android",
-                        title = "OS",
-                        modifier = Modifier.padding(innerPadding)
+                        "Tiago Tito",
+                        "Engenheiro de Software",
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .align(alignment = Alignment.CenterHorizontally)
                     )
-                }
+                    Contact(
+                        phone = "+55(85)9 91999999",
+                        linkedin = "@Tiago Tito",
+                        email = "tiagotito.contato@gmail.com",
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .align(alignment = Alignment.CenterHorizontally)
+                    )
+                })
             }
         }
     }
@@ -60,7 +77,7 @@ fun Info(name: String, title: String, modifier: Modifier = Modifier) {
         )
         Text(
             text = title,
-            fontSize = 36.sp,
+            fontSize = 18.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .align(alignment = Alignment.CenterHorizontally)
@@ -68,10 +85,64 @@ fun Info(name: String, title: String, modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun Contact(phone: String, linkedin: String, email: String, modifier: Modifier = Modifier) {
+    Column (
+        modifier
+    ) {
+        Row {
+            Icon(
+                imageVector = Icons.Default.Call,
+                contentDescription = "phone"
+            )
+            Text(
+                text = phone,
+                fontSize = 16.sp
+            )
+        }
+        Row {
+            Icon(
+                imageVector = Icons.Default.Share,
+                contentDescription = "share icon"
+            )
+            Text(
+                text = linkedin,
+                fontSize = 16.sp
+            )
+        }
+        Row {
+            Icon(
+                imageVector = Icons.Default.Email,
+                contentDescription = "Email",
+            )
+            Text(
+                text = email,
+                fontSize = 16.sp
+            )
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     BusinessCardTheme {
-        Info("Android", "OS")
+        Column(content = {
+            Info(
+                "Tiago Tito",
+                "Engenheiro de Software",
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(alignment = Alignment.CenterHorizontally)
+            )
+            Contact(
+                phone = "+55(85)9 91999999",
+                linkedin = "@Tiago Tito",
+                email = "tiagotito.contato@gmail.com",
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(alignment = Alignment.CenterHorizontally)
+            )
+        })
     }
 }
